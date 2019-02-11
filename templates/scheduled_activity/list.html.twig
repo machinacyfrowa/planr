@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+<table>
+    <tr>
+        <th>Nazwa</th>
+        <th>Początek</th>
+        <th>Koniec</th>
+        <th>Pokój</th>
+        <th>Grupa</th>
+        <th>Prowadzący</th>
+    </tr>
+    {% for activity in activities %}
+        <tr>
+        <td>{{ activity.name }}</td>
+        <td>{{ activity.begin|date("d.m H:i") }}</td>
+        <td>{{ activity.end|date("d.m H:i") }}</td>
+        <td>{{ activity.classroom }}</td>
+        <td>{{ activity.studentgroup }}</td>
+        <td>{{ activity.lecturer }}</td>
+        </tr>
+    {% endfor %}
+</table>
+{% endblock %}
