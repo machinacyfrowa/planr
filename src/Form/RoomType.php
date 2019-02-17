@@ -2,29 +2,27 @@
 
 namespace App\Form;
 
-use App\Entity\ScheduledActivity;
+use App\Entity\Room;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class ScheduledActivityType extends AbstractType
+class RoomType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('Begin')
-            ->add('End')
             ->add('Name')
-            ->add('StudentGroup')
-            ->add('Lecturer')
-            ->add('Room')
+            ->add('Capacity')
+            ->add('MaxCapacity')
+            ->add('RoomType')
         ;
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => ScheduledActivity::class,
+            'data_class' => Room::class,
         ]);
     }
 }

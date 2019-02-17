@@ -12,9 +12,9 @@
                 <th>Begin</th>
                 <th>End</th>
                 <th>Name</th>
-                <th>Classroom</th>
                 <th>StudentGroup</th>
                 <th>Lecturer</th>
+                <th>Room</th>
                 <th>actions</th>
             </tr>
         </thead>
@@ -25,9 +25,9 @@
                 <td>{{ scheduled_activity.Begin ? scheduled_activity.Begin|date('Y-m-d H:i:s') : '' }}</td>
                 <td>{{ scheduled_activity.End ? scheduled_activity.End|date('Y-m-d H:i:s') : '' }}</td>
                 <td>{{ scheduled_activity.Name }}</td>
-                <td>{{ scheduled_activity.Classroom }}</td>
                 <td>{{ scheduled_activity.StudentGroup }}</td>
                 <td>{{ scheduled_activity.Lecturer }}</td>
+                <td>{{ scheduled_activity.Room }}</td>
                 <td>
                     <a href="{{ path('scheduled_activity_show', {'id': scheduled_activity.id}) }}">show</a>
                     <a href="{{ path('scheduled_activity_edit', {'id': scheduled_activity.id}) }}">edit</a>
@@ -35,7 +35,7 @@
             </tr>
         {% else %}
             <tr>
-                <td colspan="8">no records found</td>
+                <td colspan="7">no records found</td>
             </tr>
         {% endfor %}
         </tbody>

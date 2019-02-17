@@ -34,17 +34,17 @@ class ScheduledActivity
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $Classroom;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
     private $StudentGroup;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
     private $Lecturer;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Room", inversedBy="scheduledActivities")
+     */
+    private $Room;
 
     public function getId(): ?int
     {
@@ -86,18 +86,6 @@ class ScheduledActivity
 
         return $this;
     }
-    
-    public function getClassroom(): ?string
-    {
-        return $this->Classroom;
-    }
-
-    public function setClassroom(string $Classroom): self
-    {
-        $this->Classroom = $Classroom;
-
-        return $this;
-    }
 
     public function getStudentGroup(): ?string
     {
@@ -119,6 +107,18 @@ class ScheduledActivity
     public function setLecturer(string $Lecturer): self
     {
         $this->Lecturer = $Lecturer;
+
+        return $this;
+    }
+
+    public function getRoom(): ?Room
+    {
+        return $this->Room;
+    }
+
+    public function setRoom(?Room $Room): self
+    {
+        $this->Room = $Room;
 
         return $this;
     }

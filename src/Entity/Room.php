@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -36,6 +38,16 @@ class Room
      * @ORM\JoinColumn(nullable=false)
      */
     private $RoomType;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\ScheduledActivity", mappedBy="Room")
+     */
+    private $scheduledActivities;
+
+    public function __construct()
+    {
+        $this->scheduledActivities = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -86,6 +98,42 @@ class Room
     public function setRoomType(?RoomType $RoomType): self
     {
         $this->RoomType = $RoomType;
+
+        return $this;
+    }
+    
+    public function __toString()
+    {
+        return $this->getName();
+    }
+
+    /**
+     * @return Collection|ScheduledActivity[]
+     */
+    public function getScheduledActivities(): Collection
+    {
+        return $this->scheduledActivities;
+    }
+
+    public function addScheduledActivity(ScheduledActivity $scheduledActivity): self
+    {
+        if (!$this->scheduledActivities->contains($scheduledActivity)) {
+            $this->scheduledActivities[] = $scheduledActivity;
+            $scheduledActivity->setRoom($this);
+        }
+
+        return $this;
+    }
+
+    public function removeScheduledActivity(ScheduledActivity $scheduledActivity): self
+    {
+        if ($this->scheduledActivities->contains($scheduledActivity)) {
+            $this->scheduledActivities->removeElement($scheduledActivity);
+            // set the owning side to null (unless already changed)
+            if ($scheduledActivity->getRoom() === $this) {
+                $scheduledActivity->setRoom(null);
+            }
+        }
 
         return $this;
     }
