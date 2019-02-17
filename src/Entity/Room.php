@@ -40,7 +40,7 @@ class Room
     private $RoomType;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\ScheduledActivity", mappedBy="Room")
+     * @ORM\OneToMany(targetEntity="App\Entity\Activity", mappedBy="Room")
      */
     private $scheduledActivities;
 
@@ -101,21 +101,20 @@ class Room
 
         return $this;
     }
-    
     public function __toString()
     {
         return $this->getName();
     }
 
     /**
-     * @return Collection|ScheduledActivity[]
+     * @return Collection|Activity[]
      */
     public function getScheduledActivities(): Collection
     {
         return $this->scheduledActivities;
     }
 
-    public function addScheduledActivity(ScheduledActivity $scheduledActivity): self
+    public function addActivity(Activity $scheduledActivity): self
     {
         if (!$this->scheduledActivities->contains($scheduledActivity)) {
             $this->scheduledActivities[] = $scheduledActivity;
@@ -125,7 +124,7 @@ class Room
         return $this;
     }
 
-    public function removeScheduledActivity(ScheduledActivity $scheduledActivity): self
+    public function removeActivity(Activity $scheduledActivity): self
     {
         if ($this->scheduledActivities->contains($scheduledActivity)) {
             $this->scheduledActivities->removeElement($scheduledActivity);

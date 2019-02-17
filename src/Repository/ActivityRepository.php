@@ -2,25 +2,25 @@
 
 namespace App\Repository;
 
-use App\Entity\ScheduledActivity;
+use App\Entity\Activity;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
- * @method ScheduledActivity|null find($id, $lockMode = null, $lockVersion = null)
- * @method ScheduledActivity|null findOneBy(array $criteria, array $orderBy = null)
- * @method ScheduledActivity[]    findAll()
- * @method ScheduledActivity[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Activity|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Activity|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Activity[]    findAll()
+ * @method Activity[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class ScheduledActivityRepository extends ServiceEntityRepository
+class ActivityRepository extends ServiceEntityRepository
 {
     public function __construct(RegistryInterface $registry)
     {
-        parent::__construct($registry, ScheduledActivity::class);
+        parent::__construct($registry, Activity::class);
     }
 
     // /**
-    //  * @return ScheduledActivity[] Returns an array of ScheduledActivity objects
+    //  * @return Activity[] Returns an array of Activity objects
     //  */
     /*
     public function findByExampleField($value)
@@ -37,7 +37,7 @@ class ScheduledActivityRepository extends ServiceEntityRepository
     */
 
     /*
-    public function findOneBySomeField($value): ?ScheduledActivity
+    public function findOneBySomeField($value): ?Activity
     {
         return $this->createQueryBuilder('s')
             ->andWhere('s.exampleField = :val')

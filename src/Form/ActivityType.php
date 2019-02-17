@@ -2,12 +2,12 @@
 
 namespace App\Form;
 
-use App\Entity\ScheduledActivity;
+use App\Entity\Activity;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class ScheduledActivityType extends AbstractType
+class ActivityType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -24,7 +24,7 @@ class ScheduledActivityType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => ScheduledActivity::class,
+            'data_class' => Activity::class,
         ]);
     }
 }
