@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New ScheduledActivity{% endblock %}
+
+{% block body %}
+    <h1>Create new ScheduledActivity</h1>
+
+    {{ include('scheduled_activity/_form.html.twig') }}
+
+    <a href="{{ path('scheduled_activity_index') }}">back to list</a>
+{% endblock %}
