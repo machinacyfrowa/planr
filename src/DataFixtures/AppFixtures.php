@@ -4,10 +4,14 @@ namespace App\DataFixtures;
 
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
+use \DateTime;
 use App\Entity\Activity;
 use App\Entity\Room;
 use App\Entity\RoomType;
-use \DateTime;
+use App\Entity\Division;
+use App\Entity\Course;
+use App\Entity\Tutor;
+
 
 class AppFixtures extends Fixture
 {
@@ -33,6 +37,32 @@ class AppFixtures extends Fixture
         $manager->flush();
         $rooms = $manager->getRepository("App:Room")->findAll();
         for ($i = 0; $i < 20; $i++) {
+            //create courses (subjects)
+            $course = new Course();
+            $course->setName("Random course " . rand(1,200));
+            $manager->persist($course);
+        }
+        $manager->flush();
+        $courses = $manager->getRepository("App:Course")->findAll();
+        for ($i = 0; $i < 20; $i++) {
+            //create divistions (student groups)
+            $division = new Division();
+            $division->setName("Random division " . rand(1,200));
+            $manager->persist($division);
+        }
+        $manager->flush();
+        $divisions = $manager->getRepository("App:Division")->findAll();
+        for ($i = 0; $i < 20; $i++) {
+            //create divistions (student groups)
+            $tutor = new Tutor();
+            $tutor->setFirstName("Random");
+            $tutor->setLastName("Tutor" . rand(1,200));
+            $tutor->setDegree("Level ".rand(0,2));
+            $manager->persist($tutor);
+        }
+        $manager->flush();
+        $tutors = $manager->getRepository("App:Tutor")->findAll();
+        for ($i = 0; $i < 20; $i++) {
             $activity = new Activity();
             $randomStartDT = new DateTime();
             $randomStartDT->setTimestamp(time() - rand(1000, 10000));
@@ -40,10 +70,10 @@ class AppFixtures extends Fixture
             $randomEndDT = new DateTime();
             $randomEndDT->setTimestamp(time() + rand(1000, 10000));
             $activity->setEnd($randomEndDT);
-            $activity->setName("Random activity " . rand(1,200));
-            $activity->setStudentGroup("Random group" . rand(1,200));
-            $activity->setLecturer("Random lecturer " . rand(1,200));
             $activity->setRoom($rooms[array_rand($rooms)]);
+            $activity->setCourse($courses[array_rand($courses)]);
+            $activity->setDivision($divisions[array_rand($divisions)]);
+            $activity->setTutor($tutors[array_rand($tutors)]);
             $manager->persist($activity);
         }
         $manager->flush();

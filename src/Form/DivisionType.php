@@ -2,29 +2,24 @@
 
 namespace App\Form;
 
-use App\Entity\Activity;
+use App\Entity\Division;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class ActivityType extends AbstractType
+class DivisionType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('Begin')
-            ->add('End')
-            ->add('Room')
-            ->add('Course')
-            ->add('Tutor')
-            ->add('Division')
+            ->add('Name')
         ;
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => Activity::class,
+            'data_class' => Division::class,
         ]);
     }
 }

@@ -1,4 +1,40 @@
 {{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
+<div class="row">
+    <div class="form-group col-12">
+        {{ form_errors(form) }}
+    </div>
+    <div class="form-group col-12 col-lg-6">
+        <label for="activity_Begin_date">Rozpoczęcie zajęć</label>
+        {{ form_widget(form.Begin) }}
+        <small id="activity_Begin_Help" class="form-text text-muted">Data i godzina rozpoczęcia zajęć</small>
+    </div>
+    <div class="form-group col-12 col-lg-6">
+        <label for="activity_End_date">Zakończenie zajęć</label>
+        {{ form_widget(form.End) }}
+        <small id="activity_End_Help" class="form-text text-muted">Data i godzina zakończenia zajęć</small>
+    </div>
+</div>
+<div class="row mt-3">
+    <div class="form-group col-12 col-lg-3">
+        <label for="activity_Room_date">Sala:</label>
+        {{ form_widget(form.Room) }}
+        <small id="activity_Room_Help" class="form-text text-muted">Sala w której mają odbyć się zajęcia</small>
+    </div>
+    <div class="form-group col-12 col-lg-3">
+        <label for="activity_Course_date">Przedmiot:</label>
+        {{ form_widget(form.Course) }}
+        <small id="activity_Course_Help" class="form-text text-muted">Nazwa przedmiotu wykładanego</small>
+    </div>
+    <div class="form-group col-12 col-lg-3">
+        <label for="activity_Tutor_date">Prowadzący:</label>
+        {{ form_widget(form.Tutor) }}
+        <small id="activity_Tutor_Help" class="form-text text-muted">Nauczyciel lub wykładowca</small>
+    </div>
+    <div class="form-group col-12 col-lg-3">
+        <label for="activity_Division_date">Grupa:</label>
+        {{ form_widget(form.Division) }}
+        <small id="activity_Division_Help" class="form-text text-muted">Nazwa unikatowa grupy</small>
+    </div>
+    <button class="btn btn-light col-12">{{ button_label|default('Zapisz') }}</button>
+</div><!--/row-->
 {{ form_end(form) }}

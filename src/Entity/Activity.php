@@ -27,24 +27,24 @@ class Activity
     private $End;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $Name;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $StudentGroup;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $Lecturer;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Room", inversedBy="scheduledActivities")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Room", inversedBy="activities", fetch="EAGER")
      */
     private $Room;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Course", inversedBy="activities", fetch="EAGER")
+     */
+    private $Course;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Tutor", inversedBy="activities", fetch="EAGER")
+     */
+    private $Tutor;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Division", inversedBy="activities", fetch="EAGER")
+     */
+    private $Division;
 
     public function getId(): ?int
     {
@@ -75,42 +75,6 @@ class Activity
         return $this;
     }
 
-    public function getName(): ?string
-    {
-        return $this->Name;
-    }
-
-    public function setName(string $Name): self
-    {
-        $this->Name = $Name;
-
-        return $this;
-    }
-
-    public function getStudentGroup(): ?string
-    {
-        return $this->StudentGroup;
-    }
-
-    public function setStudentGroup(string $StudentGroup): self
-    {
-        $this->StudentGroup = $StudentGroup;
-
-        return $this;
-    }
-
-    public function getLecturer(): ?string
-    {
-        return $this->Lecturer;
-    }
-
-    public function setLecturer(string $Lecturer): self
-    {
-        $this->Lecturer = $Lecturer;
-
-        return $this;
-    }
-
     public function getRoom(): ?Room
     {
         return $this->Room;
@@ -119,6 +83,42 @@ class Activity
     public function setRoom(?Room $Room): self
     {
         $this->Room = $Room;
+
+        return $this;
+    }
+
+    public function getCourse(): ?Course
+    {
+        return $this->Course;
+    }
+
+    public function setCourse(?Course $Course): self
+    {
+        $this->Course = $Course;
+
+        return $this;
+    }
+
+    public function getTutor(): ?Tutor
+    {
+        return $this->Tutor;
+    }
+
+    public function setTutor(?Tutor $Tutor): self
+    {
+        $this->Tutor = $Tutor;
+
+        return $this;
+    }
+
+    public function getDivision(): ?Division
+    {
+        return $this->Division;
+    }
+
+    public function setDivision(?Division $Division): self
+    {
+        $this->Division = $Division;
 
         return $this;
     }

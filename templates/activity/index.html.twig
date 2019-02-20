@@ -11,35 +11,35 @@
                 <th>Id</th>
                 <th>Begin</th>
                 <th>End</th>
-                <th>Name</th>
-                <th>StudentGroup</th>
-                <th>Lecturer</th>
                 <th>Room</th>
+                <th>Course</th>
+                <th>Division</th>
+                <th>Tutor</th>
                 <th>actions</th>
             </tr>
         </thead>
         <tbody>
-        {% for Activity in scheduled_activities %}
+        {% for activity in activities %}
             <tr>
-                <td>{{ Activity.id }}</td>
-                <td>{{ Activity.Begin ? Activity.Begin|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ Activity.End ? Activity.End|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ Activity.Name }}</td>
-                <td>{{ Activity.StudentGroup }}</td>
-                <td>{{ Activity.Lecturer }}</td>
-                <td>{{ Activity.Room }}</td>
+                <td>{{ activity.id }}</td>
+                <td>{{ activity.Begin ? activity.Begin|date('Y-m-d H:i') : '' }}</td>
+                <td>{{ activity.End ? activity.End|date('Y-m-d H:i') : '' }}</td>
+                <td>{{ activity.Room }}</td>
+                <td>{{ activity.Course }}</td>
+                <td>{{ activity.Division }}</td>
+                <td>{{ activity.Tutor }}</td>
                 <td>
-                    <a href="{{ path('Activity_show', {'id': Activity.id}) }}">show</a>
-                    <a href="{{ path('Activity_edit', {'id': Activity.id}) }}">edit</a>
+                    <a href="{{ path('activity_show', {'id': activity.id}) }}">Pokaż</a>
+                    <a href="{{ path('activity_edit', {'id': activity.id}) }}">Edytuj</a>
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="7">no records found</td>
+                <td colspan="4">no records found</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <a href="{{ path('Activity_new') }}">Create new</a>
+    <a href="{{ path('activity_new') }}">Dodaj nowe</a>
 {% endblock %}

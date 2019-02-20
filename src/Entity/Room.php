@@ -42,11 +42,11 @@ class Room
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Activity", mappedBy="Room")
      */
-    private $scheduledActivities;
+    private $activities;
 
     public function __construct()
     {
-        $this->scheduledActivities = new ArrayCollection();
+        $this->activities = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -111,13 +111,13 @@ class Room
      */
     public function getScheduledActivities(): Collection
     {
-        return $this->scheduledActivities;
+        return $this->activities;
     }
 
     public function addActivity(Activity $scheduledActivity): self
     {
-        if (!$this->scheduledActivities->contains($scheduledActivity)) {
-            $this->scheduledActivities[] = $scheduledActivity;
+        if (!$this->activities->contains($scheduledActivity)) {
+            $this->activities[] = $scheduledActivity;
             $scheduledActivity->setRoom($this);
         }
 
@@ -126,8 +126,8 @@ class Room
 
     public function removeActivity(Activity $scheduledActivity): self
     {
-        if ($this->scheduledActivities->contains($scheduledActivity)) {
-            $this->scheduledActivities->removeElement($scheduledActivity);
+        if ($this->activities->contains($scheduledActivity)) {
+            $this->activities->removeElement($scheduledActivity);
             // set the owning side to null (unless already changed)
             if ($scheduledActivity->getRoom() === $this) {
                 $scheduledActivity->setRoom(null);

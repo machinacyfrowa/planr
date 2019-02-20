@@ -11,80 +11,80 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/scheduled/activity")
+ * @Route("/admin/activity")
  */
 class ActivityController extends AbstractController
 {
     /**
-     * @Route("/", name="Activity_index", methods={"GET"})
+     * @Route("/", name="activity_index", methods={"GET"})
      */
-    public function index(ActivityRepository $scheduledActivityRepository): Response
+    public function index(ActivityRepository $activityRepository): Response
     {
-        return $this->render('Activity/index.html.twig', ['scheduled_activities' => $scheduledActivityRepository->findAll()]);
+        return $this->render('activity/index.html.twig', ['activities' => $activityRepository->findAll()]);
     }
 
     /**
-     * @Route("/new", name="Activity_new", methods={"GET","POST"})
+     * @Route("/new", name="activity_new", methods={"GET","POST"})
      */
     public function new(Request $request): Response
     {
-        $scheduledActivity = new Activity();
-        $form = $this->createForm(ActivityType::class, $scheduledActivity);
+        $activity = new Activity();
+        $form = $this->createForm(ActivityType::class, $activity);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($scheduledActivity);
+            $entityManager->persist($activity);
             $entityManager->flush();
 
-            return $this->redirectToRoute('Activity_index');
+            return $this->redirectToRoute('activity_index');
         }
 
-        return $this->render('Activity/new.html.twig', [
-            'Activity' => $scheduledActivity,
+        return $this->render('activity/new.html.twig', [
+            'activity' => $activity,
             'form' => $form->createView(),
         ]);
     }
 
     /**
-     * @Route("/{id}", name="Activity_show", methods={"GET"})
+     * @Route("/{id}", name="activity_show", methods={"GET"})
      */
-    public function show(Activity $scheduledActivity): Response
+    public function show(Activity $activity): Response
     {
-        return $this->render('Activity/show.html.twig', ['Activity' => $scheduledActivity]);
+        return $this->render('activity/show.html.twig', ['activity' => $activity]);
     }
 
     /**
-     * @Route("/{id}/edit", name="Activity_edit", methods={"GET","POST"})
+     * @Route("/{id}/edit", name="activity_edit", methods={"GET","POST"})
      */
-    public function edit(Request $request, Activity $scheduledActivity): Response
+    public function edit(Request $request, Activity $activity): Response
     {
-        $form = $this->createForm(ActivityType::class, $scheduledActivity);
+        $form = $this->createForm(ActivityType::class, $activity);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('Activity_index', ['id' => $scheduledActivity->getId()]);
+            return $this->redirectToRoute('activity_index', ['id' => $activity->getId()]);
         }
 
-        return $this->render('Activity/edit.html.twig', [
-            'Activity' => $scheduledActivity,
+        return $this->render('activity/edit.html.twig', [
+            'activity' => $activity,
             'form' => $form->createView(),
         ]);
     }
 
     /**
-     * @Route("/{id}", name="Activity_delete", methods={"DELETE"})
+     * @Route("/{id}", name="activity_delete", methods={"DELETE"})
      */
-    public function delete(Request $request, Activity $scheduledActivity): Response
+    public function delete(Request $request, Activity $activity): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$scheduledActivity->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete'.$activity->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->remove($scheduledActivity);
+            $entityManager->remove($activity);
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('Activity_index');
+        return $this->redirectToRoute('activity_index');
     }
 }
